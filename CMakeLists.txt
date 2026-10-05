@@ -18,6 +18,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(BoronTest)
 
 add_executable(BoronMathLibrary
+    src/BoronMathTests/BoronMathLibrary.cpp
     src/BoronMathTests/Tests.cpp
 )
 
