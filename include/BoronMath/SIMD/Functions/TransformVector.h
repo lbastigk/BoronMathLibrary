@@ -1,5 +1,5 @@
 #pragma once
-#include "BoronMath.h"
+#include "BoronMath/BoronMath.h"
 
 inline BML::Vector4 Vector4Transform(const BML::Vector4& v, const BML::Matrix4x4& m) {
     __m128 vec = _mm_loadu_ps(v.data_ptr());

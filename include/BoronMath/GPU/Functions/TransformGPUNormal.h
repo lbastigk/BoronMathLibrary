@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../GPUVector4/GPUVector4.h"
-#include "../GPUMatrix4x4/GPUMatrix4x4.h"
-#include "../GPUVector3/GPUVector3.h"
+#include "BoronMath/GPU/GPUVector4/GPUVector4.h"
+#include "BoronMath/GPU/GPUMatrix4x4/GPUMatrix4x4.h"
+#include "BoronMath/GPU/GPUVector3/GPUVector3.h"
 
 inline GPUVector4 TransformGPUNormal(const GPUVector4& v, const GPUMatrix4x4& m)
 {

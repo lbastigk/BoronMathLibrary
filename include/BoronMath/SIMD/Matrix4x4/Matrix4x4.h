@@ -7,7 +7,7 @@
 #include <immintrin.h>
 #include <iostream>
 
-#include "../../BoronMath.h"
+#include "BoronMath/BoronMath.h"
 
 namespace BML {
     class Vector4;

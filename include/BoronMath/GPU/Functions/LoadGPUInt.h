@@ -1,6 +1,7 @@
-#pragma once 
-#include "../GPUVector4/GPUVector4.h"
-#include "../GPUInt3/GPUInt3.h"
+#pragma once
+
+#include "BoronMath/GPU/GPUVector4/GPUVector4.h"
+#include "BoronMath/GPU/GPUInt3/GPUInt3.h"
 
 inline GPUVector4 LoadInt3(GPUInt3 a) {
 	return GPUVector4(

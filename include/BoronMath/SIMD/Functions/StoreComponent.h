@@ -1,5 +1,5 @@
 #pragma once
-#include "../../BoronMath.h"
+#include "BoronMath/BoronMath.h"
 
 inline void StoreVector3(BML::Vector3* dest, const BML::Vector4& src) {
 	if (!dest) return;

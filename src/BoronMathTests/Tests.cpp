@@ -1,7 +1,5 @@
-#include "../../src/Tests/Tests.h"
-
-#include "BoronMath.h"
-
+#include "BoronMathTests/Tests.h"
+#include "BoronMath/BoronMath.h"
 #include "BoronTest.h"
 
 void Tests::doTests() {

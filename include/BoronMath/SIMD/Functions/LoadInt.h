@@ -1,5 +1,5 @@
 #pragma once
-#include "BoronMath.h"
+#include "BoronMath/BoronMath.h"
 
 inline BML::Vector4 LoadInt3(BML::Int3 a) {
 	return BML::Vector4(

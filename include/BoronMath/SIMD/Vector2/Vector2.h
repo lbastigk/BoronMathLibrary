@@ -1,9 +1,10 @@
+#include <algorithm>
+#include <cmath>
+#include <cstdlib>
 #include <immintrin.h>
 #include <iostream>
-#include <cmath>
-#include "../Matrix4x4/Matrix4x4.h"
-#include <algorithm>
-#include <cstdlib>
+
+#include "BoronMath/SIMD/Matrix4x4/Matrix4x4.h"
 
 #ifndef NOMINMAX
 #define NOMINMAX

@@ -1,6 +1,6 @@
 #pragma once
-#include "BoronMath.h"
-#include "Variables.h"
+#include "BoronMath/BoronMath.h"
+#include "BoronMath/Variables.h"
 
 inline float DegreesToRadians(float degrees)
 {

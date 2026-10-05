@@ -1,6 +1,6 @@
 #pragma once
-#include "../../SIMD/Vector3/Vector3.h"
-#include "../../SIMD/Matrix4x4/Matrix4x4.h"
+#include "BoronMath/SIMD/Vector3/Vector3.h"
+#include "BoronMath/SIMD/Matrix4x4/Matrix4x4.h"
 
 #ifndef NOMINMAX
 #define NOMINMAX

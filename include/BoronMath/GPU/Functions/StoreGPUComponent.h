@@ -1,5 +1,6 @@
 #pragma once
-#include "../../BoronMath.h"
+
+#include "BoronMath/BoronMath.h"
 
 inline void StoreVector3(GPUVector3* dest, const GPUVector4& src) {
 	if (!dest) return;

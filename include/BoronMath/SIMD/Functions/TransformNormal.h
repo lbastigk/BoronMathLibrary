@@ -1,5 +1,5 @@
 #pragma once
-#include "BoronMath.h"
+#include "BoronMath/BoronMath.h"
 
 inline BML::Vector4 TransformNormal(const BML::Vector4& v, const BML::Matrix4x4& m)
 {

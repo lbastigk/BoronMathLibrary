@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 
-#include "../GPUVector4/GPUVector4.h"
+#include "BoronMath/GPU/GPUVector4/GPUVector4.h"
 
 struct GPUInt3
 {

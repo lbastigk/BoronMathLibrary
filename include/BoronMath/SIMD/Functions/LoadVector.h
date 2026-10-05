@@ -1,5 +1,5 @@
 #pragma once
-#include "BoronMath.h"
+#include "BoronMath/BoronMath.h"
 
 //Vector2
 inline BML::Vector2 Vector2ToVector2(const BML::Vector2& a) {

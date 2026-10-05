@@ -1,6 +1,7 @@
 #pragma once
 
-#include "../Matrix4x4/Matrix4x4.h"
+#include "BoronMath/SIMD/Vector4/Vector4.h"
+#include "BoronMath/SIMD/Matrix4x4/Matrix4x4.h"
 
 inline Vector4 Vector4Transform(const Vector4& v, const Matrix4x4& m) {
     float x = v.x();

@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 
-#include "GPU/GPUMatrix4x4/GPUMatrix4x4.h"
+#include "BoronMath/GPU/GPUMatrix4x4/GPUMatrix4x4.h"
 
 struct GPUVector3
 {

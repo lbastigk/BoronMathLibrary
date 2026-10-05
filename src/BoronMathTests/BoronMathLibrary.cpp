@@ -1,6 +1,6 @@
 ﻿#include <iostream>
 
-#include "../../Tests/Tests.h"
+#include "BoronMathTests/Tests.h"
 
 int main() {
     std::cout << "Hello BoronMathLib" << std::endl;
