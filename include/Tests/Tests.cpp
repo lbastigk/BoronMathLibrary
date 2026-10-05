@@ -1,4 +1,4 @@
-#include "Tests.h"
+#include "../../src/Tests/Tests.h"
 
 #include "BoronMath.h"
 
