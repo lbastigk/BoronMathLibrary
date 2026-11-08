@@ -1,9 +1,14 @@
 #pragma once
 
-#include "BoronMath/GPU/GPUVector4/GPUVector4.h"
-#include "BoronMath/GPU/GPUInt3/GPUInt3.h"
+//----------------------------------------
+// Includes
 
-inline GPUVector4 LoadInt3(GPUInt3 a) {
+// BoronMath
+#include "BoronMath/GPU/GPUInt3/GPUInt3.h"
+#include "BoronMath/GPU/GPUVector4/GPUVector4.h"
+
+//----------------------------------------
+inline GPUVector4 LoadInt3(GPUInt3 const& a) {
     return GPUVector4(
         static_cast<float>(a.x),
         static_cast<float>(a.y),
