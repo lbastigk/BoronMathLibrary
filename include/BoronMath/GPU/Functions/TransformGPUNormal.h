@@ -4,7 +4,7 @@
 #include "BoronMath/GPU/GPUMatrix4x4/GPUMatrix4x4.h"
 #include "BoronMath/GPU/GPUVector3/GPUVector3.h"
 
-inline GPUVector4 TransformGPUNormal(const GPUVector4& v, const GPUMatrix4x4& m)
+inline GPUVector4 TransformGPUNormal(GPUVector4 const& v, const GPUMatrix4x4& m)
 {
 	GPUVector4 result;
 	result.x = v.x * m.x.x + v.y * m.y.x + v.z * m.z.x;
@@ -14,7 +14,7 @@ inline GPUVector4 TransformGPUNormal(const GPUVector4& v, const GPUMatrix4x4& m)
 	return result;
 }
 
-inline GPUVector3 TransformGPUNormal(const GPUVector3& v, const GPUMatrix4x4& m)
+inline GPUVector3 TransformGPUNormal(GPUVector3 const& v, const GPUMatrix4x4& m)
 {
 	GPUVector3 result;
 	result.x = v.x * m.x.x + v.y * m.y.x + v.z * m.z.x;
