@@ -37,7 +37,7 @@ namespace BML {
             data[3] = 0;
         }
 
-        Int2(const int* arr) {
+        Int2(int const* arr) {
             data[0] = arr[0];
             data[1] = arr[1];
             data[2] = 0;
@@ -45,8 +45,8 @@ namespace BML {
         }
 
         Int2(const Int2& other) {
-            __m128i v = _mm_load_si128((__m128i*)other.data);
-            _mm_store_si128((__m128i*)data, v);
+            __m128i v = _mm_load_si128(reinterpret_cast<__m128i*>(other.data));
+            _mm_store_si128(reinterpret_cast<__m128i*>(data), v);
         }
 
         // Operators
@@ -57,27 +57,27 @@ namespace BML {
 
         Int2 operator+(int scalar) const {
             Int2 result;
-            __m128i a = _mm_load_si128((__m128i*)data);
+            __m128i a = _mm_load_si128(reinterpret_cast<__m128i*>(data));
             __m128i b = _mm_set1_epi32(scalar);
             __m128i sum = _mm_add_epi32(a, b);
-            _mm_store_si128((__m128i*)result.data, sum);
+            _mm_store_si128(reinterpret_cast<__m128i*>(result.data), sum);
             return result;
         }
 
         Int2 operator+(const Int2& other) const {
             Int2 result;
-            __m128i a = _mm_load_si128((__m128i*)data);
-            __m128i b = _mm_load_si128((__m128i*)other.data);
+            __m128i a = _mm_load_si128(reinterpret_cast<__m128i*>(data));
+            __m128i b = _mm_load_si128(reinterpret_cast<__m128i*>(other.data));
             __m128i sum = _mm_add_epi32(a, b);
-            _mm_store_si128((__m128i*)result.data, sum);
+            _mm_store_si128(reinterpret_cast<__m128i*>(result.data), sum);
             return result;
         }
 
         Int2& operator+=(const Int2& other) {
-            __m128i a = _mm_load_si128((__m128i*)data);
-            __m128i b = _mm_load_si128((__m128i*)other.data);
+            __m128i a = _mm_load_si128(reinterpret_cast<__m128i*>(data));
+            __m128i b = _mm_load_si128(reinterpret_cast<__m128i*>(other.data));
             __m128i sum = _mm_add_epi32(a, b);
-            _mm_store_si128((__m128i*)data, sum);
+            _mm_store_si128(reinterpret_cast<__m128i*>(data), sum);
             return *this;
         }
 
@@ -88,54 +88,54 @@ namespace BML {
 
         Int2 operator-(int scalar) const {
             Int2 result;
-            __m128i a = _mm_load_si128((__m128i*)data);
+            __m128i a = _mm_load_si128(reinterpret_cast<__m128i*>(data));
             __m128i b = _mm_set1_epi32(scalar);
             __m128i diff = _mm_sub_epi32(a, b);
-            _mm_store_si128((__m128i*)result.data, diff);
+            _mm_store_si128(reinterpret_cast<__m128i*>(result.data), diff);
             return result;
         }
 
         Int2 operator-(const Int2& other) const {
             Int2 result;
-            __m128i a = _mm_load_si128((__m128i*)data);
-            __m128i b = _mm_load_si128((__m128i*)other.data);
+            __m128i a = _mm_load_si128(reinterpret_cast<__m128i*>(data));
+            __m128i b = _mm_load_si128(reinterpret_cast<__m128i*>(other.data));
             __m128i diff = _mm_sub_epi32(a, b);
-            _mm_store_si128((__m128i*)result.data, diff);
+            _mm_store_si128(reinterpret_cast<__m128i*>(result.data), diff);
             return result;
         }
 
         Int2& operator-=(const Int2& other) {
-            __m128i a = _mm_load_si128((__m128i*)data);
-            __m128i b = _mm_load_si128((__m128i*)other.data);
+            __m128i a = _mm_load_si128(reinterpret_cast<__m128i*>(data));
+            __m128i b = _mm_load_si128(reinterpret_cast<__m128i*>(other.data));
             __m128i diff = _mm_sub_epi32(a, b);
-            _mm_store_si128((__m128i*)data, diff);
+            _mm_store_si128(reinterpret_cast<__m128i*>(data), diff);
             return *this;
         }
 
         // *
         Int2 operator*(int scalar) const {
             Int2 result;
-            __m128i a = _mm_load_si128((__m128i*)data);
+            __m128i a = _mm_load_si128(reinterpret_cast<__m128i*>(data));
             __m128i b = _mm_set1_epi32(scalar);
             __m128i prod = _mm_mullo_epi32(a, b);
-            _mm_store_si128((__m128i*)result.data, prod);
+            _mm_store_si128(reinterpret_cast<__m128i*>(result.data), prod);
             return result;
         }
 
         Int2 operator*(const Int2& other) const {
             Int2 result;
-            __m128i a = _mm_load_si128((__m128i*)data);
-            __m128i b = _mm_load_si128((__m128i*)other.data);
+            __m128i a = _mm_load_si128(reinterpret_cast<__m128i*>(data));
+            __m128i b = _mm_load_si128(reinterpret_cast<__m128i*>(other.data));
             __m128i prod = _mm_mullo_epi32(a, b);
-            _mm_store_si128((__m128i*)result.data, prod);
+            _mm_store_si128(reinterpret_cast<__m128i*>(result.data), prod);
             return result;
         }
 
         Int2& operator*=(const Int2& other) {
-            __m128i a = _mm_load_si128((__m128i*)data);
-            __m128i b = _mm_load_si128((__m128i*)other.data);
+            __m128i a = _mm_load_si128(reinterpret_cast<__m128i*>(data));
+            __m128i b = _mm_load_si128(reinterpret_cast<__m128i*>(other.data));
             __m128i prod = _mm_mullo_epi32(a, b);
-            _mm_store_si128((__m128i*)data, prod);
+            _mm_store_si128(reinterpret_cast<__m128i*>(data), prod);
             return *this;
         }
 
@@ -164,8 +164,8 @@ namespace BML {
         // =
         Int2& operator=(const Int2& other) {
             if (this != &other) {
-                __m128i v = _mm_load_si128((__m128i*)other.data);
-                _mm_store_si128((__m128i*)data, v);
+                __m128i v = _mm_load_si128(reinterpret_cast<__m128i*>(other.data));
+                _mm_store_si128(reinterpret_cast<__m128i*>(data), v);
             }
             return *this;
         }
@@ -184,7 +184,7 @@ namespace BML {
 
         // Utility functions
         float length() const {
-            __m128i int_vec = _mm_load_si128((__m128i*)data);
+            __m128i int_vec = _mm_load_si128(reinterpret_cast<__m128i*>(data));
             __m128 a = _mm_cvtepi32_ps(int_vec);
             __m128 sq = _mm_mul_ps(a, a);
 
@@ -194,7 +194,7 @@ namespace BML {
         }
 
         float lengthSquared() const {
-            __m128i a = _mm_load_si128((__m128i*)data);
+            __m128i a = _mm_load_si128(reinterpret_cast<__m128i*>(data));
             __m128 a_float = _mm_cvtepi32_ps(a);
             __m128 sq = _mm_mul_ps(a_float, a_float);
 
@@ -238,8 +238,8 @@ namespace BML {
         void setY(int newY) { data[1] = newY; }
 
         void set(const Int2& other) {
-            __m128i v = _mm_load_si128((__m128i*)other.data);
-            _mm_store_si128((__m128i*)data, v);
+            __m128i v = _mm_load_si128(reinterpret_cast<__m128i*>(other.data));
+            _mm_store_si128(reinterpret_cast<__m128i*>(data), v);
         }
 
         int cross(const Int2& other) const {
@@ -269,7 +269,7 @@ namespace BML {
         }
 
         __m128 to_float() const {
-            return _mm_cvtepi32_ps(_mm_load_si128((__m128i*)data));
+            return _mm_cvtepi32_ps(_mm_load_si128(reinterpret_cast<__m128i*>(data)));
         }
 
         Int2 projectOnto(const Int2& onto) const {
@@ -311,7 +311,7 @@ namespace BML {
             );
         }
 
-        const int* data_ptr() const { return data; }
+        int const* data_ptr() const { return data; }
         int* data_ptr() { return data; }
 
         static Int2 Zero() { return Int2(0, 0); }
