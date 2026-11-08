@@ -1,9 +1,17 @@
 #pragma once
 
-#include <iostream>
+//----------------------------------------
+// Includes
 
+// Standard library
+#include <cmath>
+#include <iostream>
+#include <stdexcept>
+
+// BoronMath
 #include "BoronMath/GPU/GPUVector4/GPUVector4.h"
 
+//----------------------------------------
 struct GPUMatrix4x4
 {
     GPUVector4 x;
@@ -20,90 +28,87 @@ inline std::ostream& operator<<(std::ostream& os, GPUMatrix4x4 const& v)
 inline GPUMatrix4x4 operator+(GPUMatrix4x4 const& a, GPUMatrix4x4 const& b)
 {
     return GPUMatrix4x4{
-        a.x + b.x,
-        a.y + b.y,
-        a.z + b.z,
-        a.w + b.w
+        .x=a.x + b.x,
+        .y=a.y + b.y,
+        .z=a.z + b.z,
+        .w=a.w + b.w
     };
 }
 
 inline GPUMatrix4x4 operator-(GPUMatrix4x4 const& a, GPUMatrix4x4 const& b)
 {
     return GPUMatrix4x4{
-        a.x - b.x,
-        a.y - b.y,
-        a.z - b.z,
-        a.w - b.w
+        .x=a.x - b.x,
+        .y=a.y - b.y,
+        .z=a.z - b.z,
+        .w=a.w - b.w
     };
 }
 
-inline GPUMatrix4x4 operator*(GPUMatrix4x4 const& a, float scalar)
+inline GPUMatrix4x4 operator*(GPUMatrix4x4 const& a, float const scalar)
 {
     return GPUMatrix4x4{
-        a.x * scalar,
-        a.y * scalar,
-        a.z * scalar,
-        a.w * scalar
+        .x=a.x * scalar,
+        .y=a.y * scalar,
+        .z=a.z * scalar,
+        .w=a.w * scalar
     };
 }
 
-inline GPUMatrix4x4 operator/(GPUMatrix4x4 const& a, float scalar)
+inline GPUMatrix4x4 operator/(GPUMatrix4x4 const& a, float const scalar)
 {
     return GPUMatrix4x4{
-        a.x / scalar,
-        a.y / scalar,
-        a.z / scalar,
-        a.w / scalar
+        .x=a.x / scalar,
+        .y=a.y / scalar,
+        .z=a.z / scalar,
+        .w=a.w / scalar
     };
 }
 
-inline GPUMatrix4x4 GPUMatrix4x4RotationRollPitchYaw(float pitch, float yaw, float roll) {
-    float cp = cosf(pitch), sp = sinf(pitch);
-    float cy = cosf(yaw), sy = sinf(yaw);
-    float cr = cosf(roll), sr = sinf(roll);
-
-    GPUMatrix4x4 m;
-
-    m.x = GPUVector4(cr * cy + sr * sp * sy, sr * cp, -cr * sy + sr * sp * cy, 0);
-    m.y = GPUVector4(-sr * cy + cr * sp * sy, cr * cp, sr * sy + cr * sp * cy, 0);
-    m.z = GPUVector4(cp * sy, -sp, cp * cy, 0);
-    m.w = GPUVector4(0, 0, 0, 1);
-
-    return m;
+inline GPUMatrix4x4 GPUMatrix4x4RotationRollPitchYaw(float const pitch, float const yaw, float const roll) {
+    auto const cp = std::cosf(pitch);
+    auto const sp = std::sinf(pitch);
+    auto const cy = std::cosf(yaw);
+    auto const sy = std::sinf(yaw);
+    auto const cr = std::cosf(roll);
+    auto const sr = std::sinf(roll);
+    return GPUMatrix4x4{
+        .x = GPUVector4(cr * cy + sr * sp * sy, sr * cp, -cr * sy + sr * sp * cy, 0),
+        .y = GPUVector4(-sr * cy + cr * sp * sy, cr * cp, sr * sy + cr * sp * cy, 0),
+        .z = GPUVector4(cp * sy, -sp, cp * cy, 0),
+        .w = GPUVector4(0, 0, 0, 1),
+    };
 }
 
-inline GPUMatrix4x4 GPUMatrix4x4PerspectiveFovLH(float fovRadians, float aspect, float nearZ, float farZ) {
-    float f = 1.0f / tanf(fovRadians / 2.0f);
-
-    GPUMatrix4x4 m = {};
-
-    m.x = { f / aspect, 0, 0, 0 };
-    m.y = { 0, f, 0, 0 };
-    m.z = { 0, 0, farZ / (farZ - nearZ), 1 };
-    m.w = { 0, 0, -nearZ * farZ / (farZ - nearZ), 0 };
-
-    return m;
+inline GPUMatrix4x4 GPUMatrix4x4PerspectiveFovLH(float const fovRadians, float const aspect, float const nearZ, float const farZ) {
+    auto const f = 1.0f / std::tanf(fovRadians / 2.0f);
+    return GPUMatrix4x4{
+        .x ={ .x = f / aspect, .y = 0, .z = 0, .w = 0 },
+        .y = { .x = 0, .y = f, .z = 0, .w = 0 },
+        .z = { .x = 0, .y = 0, .z = farZ / (farZ - nearZ), .w = 1 },
+        .w = { .x = 0, .y = 0, .z = -nearZ * farZ / (farZ - nearZ), .w = 0 },
+    };
 }
 
 inline GPUMatrix4x4 IdentityGPUMatrix4x4() {
     return GPUMatrix4x4{
-        {1, 0, 0, 0},
-        {0, 1, 0, 0},
-        {0, 0, 1, 0},
-        {0, 0, 0, 1}
+        .x={.x = 1, .y = 0, .z = 0, .w = 0},
+        .y={.x = 0, .y = 1, .z = 0, .w = 0},
+        .z={.x = 0, .y = 0, .z = 1, .w = 0},
+        .w={.x = 0, .y = 0, .z = 0, .w = 1}
     };
 }
 
-inline float Determinant3x3(float a1, float a2, float a3,
-    float b1, float b2, float b3,
-    float c1, float c2, float c3)
+inline float Determinant3x3(
+    float const a1, float const a2, float const a3,
+    float const b1, float const b2, float const b3,
+    float const c1, float const c2, float const c3)
 {
     return a1 * (b2 * c3 - b3 * c2) - a2 * (b1 * c3 - b3 * c1) + a3 * (b1 * c2 - b2 * c1);
 }
 
 inline GPUMatrix4x4 InverseGPUMatrix4x4(GPUMatrix4x4 const& m) {
-    GPUMatrix4x4 inv;
-    float det;
+    GPUMatrix4x4 inv{};
 
     // Käytä rowX, rowY, rowZ, rowW ja Vector4:n jäseniä x,y,z,w
     inv.x.x = Determinant3x3(m.y.y, m.y.z, m.y.w, m.z.y, m.z.z, m.z.w, m.w.y, m.w.z, m.w.w);
@@ -126,10 +131,10 @@ inline GPUMatrix4x4 InverseGPUMatrix4x4(GPUMatrix4x4 const& m) {
     inv.w.z = -Determinant3x3(m.x.x, m.x.y, m.x.w, m.y.x, m.y.y, m.y.w, m.z.x, m.z.y, m.z.w);
     inv.w.w = Determinant3x3(m.x.x, m.x.y, m.x.z, m.y.x, m.y.y, m.y.z, m.z.x, m.z.y, m.z.z);
 
-    det = m.x.x * inv.x.x + m.x.y * inv.y.x + m.x.z * inv.z.x + m.x.w * inv.w.x;
-    if (fabs(det) < 1e-6f) throw std::runtime_error("Matrix not invertible!");
+    auto const det = m.x.x * inv.x.x + m.x.y * inv.y.x + m.x.z * inv.z.x + m.x.w * inv.w.x;
+    if (std::fabs(det) < 1e-6f) throw std::runtime_error("Matrix not invertible!");
 
-    float invDet = 1.0f / det;
+    auto const invDet = 1.0f / det;
     inv.x.x *= invDet; inv.x.y *= invDet; inv.x.z *= invDet; inv.x.w *= invDet;
     inv.y.x *= invDet; inv.y.y *= invDet; inv.y.z *= invDet; inv.y.w *= invDet;
     inv.z.x *= invDet; inv.z.y *= invDet; inv.z.z *= invDet; inv.z.w *= invDet;
