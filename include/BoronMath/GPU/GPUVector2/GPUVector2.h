@@ -6,52 +6,65 @@ struct GPUVector2
     float x;
     float y;
 
-    inline GPUVector2& operator+=(const GPUVector2& other) {
+    GPUVector2& operator+=(GPUVector2 const& other) {
         x += other.x;
         y += other.y;
         return *this;
     }
 
-    inline GPUVector2& operator-=(const GPUVector2& other) {
+    GPUVector2& operator-=(GPUVector2 const& other) {
         x -= other.x;
         y -= other.y;
         return *this;
     }
 };
 
-inline std::ostream& operator<<(std::ostream& os, const GPUVector2& v)
+inline std::ostream& operator<<(std::ostream& os, GPUVector2 const& v)
 {
     return os << "(" << v.x << ", " << v.y << ")";
 }
 
-inline GPUVector2 operator+(const GPUVector2& a, const GPUVector2& b)
+inline GPUVector2 operator+(GPUVector2 const& a, GPUVector2 const& b)
 {
-    return GPUVector2{ a.x + b.x, a.y + b.y };
+    return GPUVector2{
+        .x=a.x + b.x,
+        .y=a.y + b.y
+    };
 }
 
-inline GPUVector2 operator-(const GPUVector2& a, const GPUVector2& b)
+inline GPUVector2 operator-(GPUVector2 const& a, GPUVector2 const& b)
 {
-    return GPUVector2{ a.x - b.x, a.y - b.y };
+    return GPUVector2{
+        .x=a.x - b.x,
+        .y=a.y - b.y
+    };
 }
 
-inline GPUVector2 operator*(const GPUVector2& a, float scalar)
+inline GPUVector2 operator*(GPUVector2 const& a, float const scalar)
 {
-    return GPUVector2{ a.x * scalar, a.y * scalar };
+    return GPUVector2{
+        .x=a.x * scalar,
+        .y=a.y * scalar
+    };
 }
 
-inline GPUVector2 operator/(const GPUVector2& a, float scalar)
+inline GPUVector2 operator/(GPUVector2 const& a, float const scalar)
 {
-    return GPUVector2{ a.x / scalar, a.y / scalar };
+    auto const scalarInv = 1.0f / scalar;
+    return GPUVector2{
+        .x=a.x * scalarInv,
+        .y=a.y * scalarInv
+    };
 }
 
-inline float dot(const GPUVector2& a, const GPUVector2& b)
+inline float dot(GPUVector2 const& a, GPUVector2 const& b)
 {
     return a.x * b.x + a.y * b.y;
 }
 
-inline float MagnitudeGPUVector2(GPUVector2 a, GPUVector2 b) {
-    float dx = abs(a.x - b.x);
-    float dy = abs(a.y - b.y);
+inline float MagnitudeGPUVector2(GPUVector2 const& a, GPUVector2 const& b) {
+    auto const dx = std::fabs(a.x - b.x);
+    auto const dy = std::fabs(a.y - b.y);
 
     return dx + dy;
 }
