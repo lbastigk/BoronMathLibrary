@@ -53,7 +53,7 @@ inline GPUVector3 operator*(GPUVector3 const& a, float const scalar)
 
 inline GPUVector3 operator/(GPUVector3 const& a, float const scalar)
 {
-    auto const scalarInv = 1 / scalar;
+    auto const scalarInv = 1.0f / scalar;
     return GPUVector3{
         .x=a.x * scalarInv,
         .y=a.y * scalarInv,
