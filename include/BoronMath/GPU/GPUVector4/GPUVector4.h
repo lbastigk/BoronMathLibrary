@@ -1,52 +1,74 @@
 #pragma once
 
+#include <cmath>
 #include <iostream>
 
 struct GPUVector4
 {
-	float x;
-	float y;
-	float z;
-	float w;
+    float x;
+    float y;
+    float z;
+    float w;
 };
 
-inline std::ostream& operator<<(std::ostream& os, const GPUVector4& v)
+inline std::ostream& operator<<(std::ostream& os, GPUVector4 const& v)
 {
-	return os << "(" << v.x << ", " << v.y << ", " << v.z << ", " << v.w << ")";
+    return os << "(" << v.x << ", " << v.y << ", " << v.z << ", " << v.w << ")";
 }
 
-inline GPUVector4 operator+(const GPUVector4& a, const GPUVector4& b)
+inline GPUVector4 operator+(GPUVector4 const& a, GPUVector4 const& b)
 {
-	return GPUVector4{ a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w };
+    return GPUVector4{
+        .x=a.x + b.x,
+        .y=a.y + b.y,
+        .z=a.z + b.z,
+        .w=a.w + b.w
+    };
 }
 
-inline GPUVector4 operator-(const GPUVector4& a, const GPUVector4& b)
+inline GPUVector4 operator-(GPUVector4 const& a, GPUVector4 const& b)
 {
-	return GPUVector4{ a.x - b.x, a.y - b.y, a.z - b.z,a.w - b.w };
+    return GPUVector4{
+        .x=a.x - b.x,
+        .y=a.y - b.y,
+        .z=a.z - b.z,
+        .w=a.w - b.w
+    };
 }
 
-inline GPUVector4 operator*(const GPUVector4& a, float scalar)
+inline GPUVector4 operator*(GPUVector4 const& a, float const scalar)
 {
-	return GPUVector4{ a.x * scalar, a.y * scalar, a.z * scalar, a.w * scalar };
+    return GPUVector4{
+        .x=a.x * scalar,
+        .y=a.y * scalar,
+        .z=a.z * scalar,
+        .w=a.w * scalar
+    };
 }
 
-inline GPUVector4 operator/(const GPUVector4& a, float scalar)
+inline GPUVector4 operator/(GPUVector4 const& a, float const scalar)
 {
-	return GPUVector4{ a.x / scalar, a.y / scalar, a.z / scalar, a.w / scalar };
+    float const scalarInv = 1 / scalar;
+    return GPUVector4{
+        .x=a.x * scalarInv,
+        .y=a.y * scalarInv,
+        .z=a.z * scalarInv,
+        .w=a.w * scalarInv
+    };
 }
 
-inline float dot(const GPUVector4& a, const GPUVector4& b)
+inline float dot(GPUVector4 const& a, GPUVector4 const& b)
 {
-	return a.x * b.x + a.y * b.y + a.z * b.z + a.w * b.w;
+    return a.x * b.x + a.y * b.y + a.z * b.z + a.w * b.w;
 }
 
 
-inline GPUVector4 VectorSet(float x, float y, float z, float w) {
-	return GPUVector4(x, y, z, w);
+inline GPUVector4 VectorSet(float const x, float const y, float const z, float const w) {
+    return GPUVector4(x, y, z, w);
 }
 
-inline GPUVector4 Normalize(const GPUVector4& v) {
-	float len = sqrtf(v.x * v.x + v.y * v.y + v.z * v.z);
-	if (len == 0.0f) return GPUVector4(0.0f, 0.0f, 0.0f, 0.0f);
-	return GPUVector4(v.x / len, v.y / len, v.z / len, 0.0f);
+inline GPUVector4 Normalize(GPUVector4 const& v) {
+    float const len = std::hypot(std::hypot(v.x, v.y), std::hypot(v.z, v.w));
+    if (len == 0.0f) return GPUVector4(0.0f, 0.0f, 0.0f, 0.0f);
+    return GPUVector4(v.x / len, v.y / len, v.z / len, v.w / len);
 }
