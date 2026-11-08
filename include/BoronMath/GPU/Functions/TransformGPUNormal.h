@@ -6,19 +6,19 @@
 
 inline GPUVector4 TransformGPUNormal(GPUVector4 const& v, const GPUMatrix4x4& m)
 {
-	GPUVector4 result;
-	result.x = v.x * m.x.x + v.y * m.y.x + v.z * m.z.x;
-	result.y = v.x * m.x.y + v.y * m.y.y + v.z * m.z.y;
-	result.z = v.x * m.x.z + v.y * m.y.z + v.z * m.z.z;
-	result.w = 0.0f;
-	return result;
+    GPUVector4 result;
+    result.x = v.x * m.x.x + v.y * m.y.x + v.z * m.z.x;
+    result.y = v.x * m.x.y + v.y * m.y.y + v.z * m.z.y;
+    result.z = v.x * m.x.z + v.y * m.y.z + v.z * m.z.z;
+    result.w = 0.0f;
+    return result;
 }
 
 inline GPUVector3 TransformGPUNormal(GPUVector3 const& v, const GPUMatrix4x4& m)
 {
-	GPUVector3 result;
-	result.x = v.x * m.x.x + v.y * m.y.x + v.z * m.z.x;
-	result.y = v.x * m.x.y + v.y * m.y.y + v.z * m.z.y;
-	result.z = v.x * m.x.z + v.y * m.y.z + v.z * m.z.z;
-	return result;
+    GPUVector3 result;
+    result.x = v.x * m.x.x + v.y * m.y.x + v.z * m.z.x;
+    result.y = v.x * m.x.y + v.y * m.y.y + v.z * m.z.y;
+    result.z = v.x * m.x.z + v.y * m.y.z + v.z * m.z.z;
+    return result;
 }
