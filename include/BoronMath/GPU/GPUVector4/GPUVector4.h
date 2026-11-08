@@ -48,7 +48,7 @@ inline GPUVector4 operator*(GPUVector4 const& a, float const scalar)
 
 inline GPUVector4 operator/(GPUVector4 const& a, float const scalar)
 {
-    float const scalarInv = 1 / scalar;
+    float const scalarInv = 1.0f / scalar;
     return GPUVector4{
         .x=a.x * scalarInv,
         .y=a.y * scalarInv,
